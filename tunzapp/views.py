@@ -70,10 +70,11 @@ def details(request, pk):
         the_child = child
         amount = request.POST.get('amount')
         donated_by = request.user
+        #added this
         name = request.POST.get('name')
         
         
-        
+        # added name to create a new donation
         donation = Donor.objects.create(name=name,child=the_child, amount=amount, donated_by = donated_by)
     
     transactions = Donor.objects.filter(id=pk)

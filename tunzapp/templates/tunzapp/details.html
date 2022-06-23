@@ -85,6 +85,7 @@
                             </thead>
                             <tbody>
                               <tr>
+                                <!-- confirm this -->
                                 {% for tran in transaction.donors.all %}
                                 
                                 <td class="table-info">{{tran.name}}</td>
@@ -135,6 +136,7 @@
         <div class="modal-body d-flex justify-content-center">
             <form action="" method="post">
                 {% csrf_token %}
+                <!-- added name input -->
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" placeholder="Name"><br>
                 <label for="">Enter Amount:</label><br>
