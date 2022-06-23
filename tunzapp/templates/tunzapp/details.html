@@ -72,12 +72,12 @@
                     <table class="table table-success table-striped table-hover">
                         <h3 class="text-center">Recent donation</h3>
                         <hr>
-                        {% for transaction in transactions %}
+                        {% for transaction in child_data %}
                         <table class="table">
                             
                             <thead>
                               <tr>
-                                <th scope="col">No:</th>
+                                
                                 <th scope="col">Donor</th>
                                 <th scope="col">Child</th>
                                 <th scope="col">Amount</th>
@@ -85,11 +85,13 @@
                             </thead>
                             <tbody>
                               <tr>
-                                <th class="table-danger" scope="row">1</th>
-                                <td class="table-info">{{transaction.donated_by}}</td>
-                                <td class="table-primary">{{transaction.child.full_name}}</td>
-                                <td class="table-success">Ksh {{transaction.amount}}</td>
+                                {% for tran in transaction.donors.all %}
+                                
+                                <td class="table-info">{{tran.name}}</td>
+                                <td class="table-primary">{{tran.child.full_name}}</td>
+                                <td class="table-success">Ksh {{tran.amount}}</td>
                               </tr>
+                              {% endfor %}
                              
                             </tbody>
                            
@@ -99,6 +101,8 @@
                 </div>
     
             </div>
+            
+            
             <div class=" text-center " style="padding-top: 5vh; ">
                 <button class="btn btn-success btn-lg rounded-pill"  type="submit" data-bs-toggle="modal" data-bs-target="#support"><h2 class="support">SUPPORT</h2></button>
             </div>
@@ -131,6 +135,8 @@
         <div class="modal-body d-flex justify-content-center">
             <form action="" method="post">
                 {% csrf_token %}
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="name" placeholder="Name"><br>
                 <label for="">Enter Amount:</label><br>
 
           <input type="number" name="amount" id="" placeholder="enter Amount" max="2000000000" min="0">

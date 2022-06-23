@@ -47,6 +47,8 @@ class Child(models.Model):
     dreams = models.CharField(max_length=255)
     needs = models.ManyToManyField(FinancialNeed)
     fee_amount = models.IntegerField(default=10000)
+    donors = models.ManyToManyField(
+    'Donor', related_name='child_donor', blank=True)
     
     def __str__(self):
         return self.full_name
@@ -77,7 +79,7 @@ class Child(models.Model):
     
     
 class Donor(models.Model):
-    child = models.ForeignKey(Child, on_delete=models.CASCADE)
+    child = models.ForeignKey(Child, on_delete=models.CASCADE,blank=True, null=True)
     name= models.CharField(max_length=255, blank=True, null=True)
     amount = models.DecimalField(max_digits=8, decimal_places=2)
     donated_by = models.ForeignKey(User, on_delete=models.CASCADE)
